@@ -151,6 +151,7 @@
 
   <script>
     let allRows = [];
+
     async function fetchTableData() {
       try {
         const res = await fetch("https://script.google.com/macros/s/AKfycbzWh7g0_jUmUSNT0AsIQWa9fQJ29T4eJ8-ZoIpFGmNbI1LUyyLAgyr_9WOnKeYs3hmO/exec");
@@ -170,22 +171,19 @@
       const thead = table.querySelector("thead");
       const tbody = table.querySelector("tbody");
 
-      // Build headers
       thead.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
-
-      // Build rows
       tbody.innerHTML = "";
+
       data.forEach(row => {
         const tr = document.createElement("tr");
         headers.forEach(h => {
           const td = document.createElement("td");
-          const cellValue = row[h] || "";
+          const value = row[h];
 
-          // Make URL clickable if it looks like a link
-          if (typeof cellValue === "string" && cellValue.startsWith("http")) {
-            td.innerHTML = `<a href="${cellValue}" target="_blank">${cellValue}</a>`;
+          if (value && typeof value === "object" && value.url) {
+            td.innerHTML = `<a href="${value.url}" target="_blank">${value.label}</a>`;
           } else {
-            td.textContent = cellValue;
+            td.textContent = value || "";
           }
 
           tr.appendChild(td);
@@ -197,7 +195,9 @@
     function filterTable() {
       const query = document.getElementById("searchInput").value.toLowerCase();
       const filtered = allRows.filter(row =>
-        Object.values(row).join(" ").toLowerCase().includes(query)
+        Object.values(row).map(val =>
+          typeof val === "object" ? `${val.label} ${val.url}` : val
+        ).join(" ").toLowerCase().includes(query)
       );
       buildTable(filtered);
     }
