@@ -9,12 +9,16 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1604066867775-43f48e3957d7?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background: #000;
+    }
+    .background {
+      background: url('https://images.unsplash.com/photo-1604066867775-43f48e3957d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
       background-size: cover;
+      min-height: 100vh;
       color: #fff;
     }
     header {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       padding: 2rem 1rem;
       text-align: center;
     }
@@ -28,13 +32,27 @@
       margin: 1rem auto 0;
       line-height: 1.6;
     }
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
     .content {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       padding: 2rem 1rem;
     }
     .search-section {
-      margin-bottom: 1.5rem;
       text-align: center;
+      margin-bottom: 1.5rem;
     }
     .search-section input {
       padding: 0.5rem;
@@ -86,20 +104,6 @@
       border: 1px solid #ccc;
       text-align: center;
     }
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #25D366;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
-    }
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
@@ -114,6 +118,7 @@
   </style>
 </head>
 <body>
+<div class="background">
   <header>
     <h1>💳 Cash and Credit Management in Lebanon</h1>
     <p>
@@ -122,6 +127,9 @@
       (In the table below, scroll left to right to see additional info like location, website, and notes.)<br><br>
       You can also use the search box to find a business quickly. Please share with the admin if you know of any other places.
     </p>
+    <div>
+      <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
+    </div>
   </header>
 
   <div class="content">
@@ -129,7 +137,7 @@
       <input type="text" id="searchInput" placeholder="Search for a business..." onkeyup="filterResults()" />
     </div>
 
-    <div id="results" class="results"></div>
+    <div id="results" class="results">Loading businesses...</div>
 
     <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false"></iframe>
 
@@ -149,26 +157,38 @@
         </tr>
       </table>
     </div>
-
-    <div style="text-align: center;">
-      <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
-    </div>
   </div>
+</div>
 
-  <script>
-    async function filterResults() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const res = await fetch("https://script.google.com/macros/s/AKfycbzWh7g0_jUmUSNT0AsIQWa9fQJ29T4eJ8-ZoIpFGmNbI1LUyyLAgyr_9WOnKeYs3hmO/exec");
-      const data = await res.json();
-      const results = document.getElementById("results");
-      results.innerHTML = "";
+<script>
+  let fullData = [];
 
-      data.forEach(entry => {
-        const rowText = Object.values(entry).join(" ").toLowerCase();
-        if (rowText.includes(query)) {
-          const div = document.createElement("div");
-          div.innerHTML = `<strong>${entry.Name || entry.Nombre || '[Unnamed]'}</strong><br>${entry.Type || ''} ${entry.Location || ''}`;
-          results.appendChild(div);
-        }
-      });
+  async function fetchData() {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbzWh7g0_jUmUSNT0AsIQWa9fQJ29T4eJ8-ZoIpFGmNbI1LUyyLAgyr_9WOnKeYs3hmO/exec");
+    fullData = await res.json();
+    filterResults(); // Populate initially
+  }
+
+  function filterResults() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const results = document.getElementById("results");
+    results.innerHTML = "";
+
+    fullData.forEach(entry => {
+      const values = Object.values(entry).join(" ").toLowerCase();
+      if (values.includes(query)) {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${entry.Name || entry.Nombre || '[Unnamed]'}</strong><br>${entry.Type || entry.Typeo || ''} ${entry.Location || ''}`;
+        results.appendChild(div);
+      }
+    });
+
+    if (results.innerHTML === "") {
+      results.innerHTML = "No matches found.";
     }
+  }
+
+  fetchData();
+</script>
+</body>
+</html>
