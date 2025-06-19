@@ -178,7 +178,7 @@
       const values = Object.values(entry).join(" ").toLowerCase();
       if (values.includes(query)) {
         const div = document.createElement("div");
-        div.innerHTML = `<strong>${entry.Name || entry.Name || '[Name]'}</strong><br>${entry.Type || entry.Typeo || ''} ${entry.Location || ''}`;
+        div.innerHTML = `<strong>${entry.Type of commerce || entry.Name || '[Unnamed]'}</strong><br>${entry.Type || entry.Typeo || ''} ${entry.Location || ''}`;
         results.appendChild(div);
       }
     });
