@@ -125,7 +125,7 @@
       <strong>What is this site for?</strong> This is a list of various types of commerces and shops in Lebanon where you can use a USD credit or debit card to pay and manage your available cash a bit better.<br><br>
       This is a live site, and we add places regularly as soon as we know about them, voluntarily. NONE of this is sponsored by any business or individual in any way.  
       (In the table below, scroll left to right to see additional info like location, website, and notes.)<br><br>
-      You can also use the search box to find a business quickly. Please share with the admin if you know of any other places.
+      You can also use the search box to find a business quickly. Scroll down to see ATM withdrawal fees. Please share with the admin if you know of any other places.
     </p>
     <div>
       <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
@@ -178,7 +178,7 @@
       const values = Object.values(entry).join(" ").toLowerCase();
       if (values.includes(query)) {
         const div = document.createElement("div");
-        div.innerHTML = `<strong>${entry.Name || entry.Nombre || '[Unnamed]'}</strong><br>${entry.Type || entry.Typeo || ''} ${entry.Location || ''}`;
+        div.innerHTML = `<strong>${entry.Name || entry.Name || '[Unnamed]'}</strong><br>${entry.Type || entry.Typeo || ''} ${entry.Location || ''}`;
         results.appendChild(div);
       }
     });
