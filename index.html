@@ -3,14 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Embedded Spreadsheet</title>
+  <title>Michelle's Data Hub</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
-    iframe { width: 100%; height: 600px; border: none; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1604066867775-43f48e3957d7?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+    }
+    .content {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+    }
+    .search-bar {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .search-bar input {
+      padding: 0.5rem;
+      width: 60%;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
+    th, td {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>📊 My Google Sheet</h1>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false"></iframe>
+  <header>
+    <h1>📊 Michelle's Data Hub</h1>
+    <p>Empowering humanitarian insights through open data and accessible tools.</p>
+  </header>
+
+  <div class="content">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search the spreadsheet below..." onkeyup="filterSheet()" />
+    </div>
+
+    <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false"></iframe>
+
+    <table>
+      <tr>
+        <th>Region</th>
+        <th>Focus Area</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>MENA</td>
+        <td>Cash for Health</td>
+        <td>In Progress</td>
+      </tr>
+      <tr>
+        <td>Americas</td>
+        <td>Post-Distribution Monitoring</td>
+        <td>Completed</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    function filterSheet() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const iframe = document.getElementById("sheetFrame");
+      const baseURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false";
+      iframe.src = baseURL + "&search=" + encodeURIComponent(query);
+    }
+  </script>
 </body>
-</html>Add index.html
+</html>
