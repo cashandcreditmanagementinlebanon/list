@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Michelle's Data Hub</title>
+  <title>Cash and Credit Management in Lebanon</title>
+  <link rel="icon" href="https://img.icons8.com/color/48/lebanon.png" type="image/png">
   <style>
     body {
       margin: 0;
@@ -14,92 +15,160 @@
     }
     header {
       background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
+      padding: 2rem 1rem;
       text-align: center;
     }
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     header p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0.5rem auto 0;
+      font-size: 1rem;
+      max-width: 700px;
+      margin: 1rem auto 0;
+      line-height: 1.6;
     }
     .content {
       background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
-    .search-bar {
-      margin-bottom: 1rem;
+    .search-section {
+      margin-bottom: 1.5rem;
       text-align: center;
     }
-    .search-bar input {
+    .search-section input {
       padding: 0.5rem;
-      width: 60%;
       font-size: 1rem;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 5px;
       border: none;
-      border-radius: 4px;
+    }
+    .results {
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    .results div {
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem 0;
     }
     iframe {
       width: 100%;
-      height: 600px;
+      height: 500px;
       border: none;
       background: #fff;
+      margin-bottom: 2rem;
+    }
+    .table-section {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .table-section h2 {
+      margin-top: 0;
+    }
+    .table-section p {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-bottom: 0.5rem;
     }
     table {
       width: 100%;
-      margin-top: 2rem;
       border-collapse: collapse;
-      background: rgba(255, 255, 255, 0.9);
-      color: #000;
+      min-width: 300px;
     }
     th, td {
       padding: 1rem;
       border: 1px solid #ccc;
       text-align: center;
     }
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      header p {
+        font-size: 0.9rem;
+      }
+      th, td {
+        padding: 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>📊 Michelle's Data Hub</h1>
-    <p>Empowering humanitarian insights through open data and accessible tools.</p>
+    <h1>💳 Cash and Credit Management in Lebanon</h1>
+    <p>
+      <strong>What is this site for?</strong> This is a list of various types of commerces and shops in Lebanon where you can use a USD credit or debit card to pay and manage your available cash a bit better.<br><br>
+      This is a live site, and we add places regularly as soon as we know about them, voluntarily. NONE of this is sponsored by any business or individual in any way.  
+      (In the table below, scroll left to right to see additional info like location, website, and notes.)<br><br>
+      You can also use the search box to find a business quickly. Please share with the admin if you know of any other places.
+    </p>
   </header>
 
   <div class="content">
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search the spreadsheet below..." onkeyup="filterSheet()" />
+    <div class="search-section">
+      <input type="text" id="searchInput" placeholder="Search for a business..." onkeyup="filterResults()" />
     </div>
 
-    <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false"></iframe>
+    <div id="results" class="results"></div>
 
-    <table>
-      <tr>
-        <th>Region</th>
-        <th>Focus Area</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>MENA</td>
-        <td>Cash for Health</td>
-        <td>In Progress</td>
-      </tr>
-      <tr>
-        <td>Americas</td>
-        <td>Post-Distribution Monitoring</td>
-        <td>Completed</td>
-      </tr>
-    </table>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false"></iframe>
+
+    <div class="table-section">
+      <h2>ATM Withdrawal fees*</h2>
+      <p>*subject to bank of origin</p>
+      <table>
+        <tr>
+          <th>AM Bank</th>
+          <th>Credit Libanais</th>
+          <th>Most other banks</th>
+        </tr>
+        <tr>
+          <td>3%</td>
+          <td>3.5%</td>
+          <td>5%</td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="text-align: center;">
+      <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
+    </div>
   </div>
 
   <script>
-    function filterSheet() {
+    async function filterResults() {
       const query = document.getElementById("searchInput").value.toLowerCase();
-      const iframe = document.getElementById("sheetFrame");
-      const baseURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRggPTcNCDCKZPtS_wCJMeiEDVguTWc2Vg7MBxEsVtOT6aJes_BMi91uTwAoO3zaw/pubhtml?gid=1137053518&single=true&widget=true&headers=false";
-      iframe.src = baseURL + "&search=" + encodeURIComponent(query);
+      const res = await fetch("https://script.google.com/macros/s/AKfycbzWh7g0_jUmUSNT0AsIQWa9fQJ29T4eJ8-ZoIpFGmNbI1LUyyLAgyr_9WOnKeYs3hmO/exec");
+      const data = await res.json();
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+
+      data.forEach(entry => {
+        const rowText = Object.values(entry).join(" ").toLowerCase();
+        if (rowText.includes(query)) {
+          const div = document.createElement("div");
+          div.innerHTML = `<strong>${entry.Name || entry.Nombre || '[Unnamed]'}</strong><br>${entry.Type || ''} ${entry.Location || ''}`;
+          results.appendChild(div);
+        }
+      });
     }
-  </script>
-</body>
-</html>
