@@ -83,6 +83,13 @@
       background-color: #f0f0f0;
       font-weight: bold;
     }
+    a {
+      color: #1a0dab;
+      text-decoration: underline;
+    }
+    a:hover {
+      color: #0c0080;
+    }
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
@@ -163,16 +170,24 @@
       const thead = table.querySelector("thead");
       const tbody = table.querySelector("tbody");
 
-      // Build table headers
+      // Build headers
       thead.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
 
-      // Build table rows
+      // Build rows
       tbody.innerHTML = "";
       data.forEach(row => {
         const tr = document.createElement("tr");
         headers.forEach(h => {
           const td = document.createElement("td");
-          td.textContent = row[h];
+          const cellValue = row[h] || "";
+
+          // Make URL clickable if it looks like a link
+          if (typeof cellValue === "string" && cellValue.startsWith("http")) {
+            td.innerHTML = `<a href="${cellValue}" target="_blank">${cellValue}</a>`;
+          } else {
+            td.textContent = cellValue;
+          }
+
           tr.appendChild(td);
         });
         tbody.appendChild(tr);
