@@ -3,185 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cash and Credit Management in Lebanon</title>
-  <link rel="icon" href="https://img.icons8.com/color/48/lebanon.png" type="image/png">
+  <title>Community Directory</title>
   <style>
+    :root {
+      --bg-light: #f9f9f9;
+      --bg-dark: #1e1e1e;
+      --text-light: #111;
+      --text-dark: #f0f0f0;
+      --table-bg: rgba(255, 255, 255, 0.85);
+      --table-dark-bg: rgba(30, 30, 30, 0.85);
+    }
+
     body {
+      font-family: sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #000;
-    }
-    .background {
-      background: url('https://images.unsplash.com/photo-1604066867775-43f48e3957d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      padding: 2rem;
+      background: url('assets/bg.jpg') no-repeat center center fixed;
       background-size: cover;
-      min-height: 100vh;
-      color: #fff;
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+      position: relative;
     }
-    header {
-      background: rgba(0, 0, 0, 0.65);
-      padding: 2rem 1rem;
-      text-align: center;
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: -1;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
+
+    body.dark {
+      color: var(--text-dark);
     }
-    header p {
-      font-size: 1rem;
-      max-width: 700px;
-      margin: 1rem auto 0;
-      line-height: 1.6;
+
+    body.dark::before {
+      background: rgba(0, 0, 0, 0.5);
     }
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #25D366;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
-    }
-    .content {
-      background: rgba(0, 0, 0, 0.65);
-      padding: 2rem 1rem;
-    }
-    .search-section {
+
+    h1 {
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    .search-section input {
-      padding: 0.5rem;
+
+    .toggle-btn {
+      display: block;
+      margin: 0 auto 2rem;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 5px;
+      background: #333;
+      color: #fff;
       border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .table-section {
-      background: rgba(255, 255, 255, 0.95);
-      color: #000;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
+
+    .toggle-btn:hover {
+      background: #555;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 600px;
+      background: var(--table-bg);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s;
     }
+
+    body.dark table {
+      background: var(--table-dark-bg);
+    }
+
     th, td {
       padding: 0.75rem;
       border: 1px solid #ccc;
       text-align: left;
     }
+
     th {
-      background-color: #f0f0f0;
-      font-weight: bold;
+      background: #eee;
     }
+
+    body.dark th {
+      background: #2c2c2c;
+    }
+
     a {
-      color: #1a0dab;
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    a:hover {
       text-decoration: underline;
     }
-    a:hover {
-      color: #0c0080;
+
+    @media (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
     }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-      header p {
-        font-size: 0.9rem;
-      }
-      th, td {
-        padding: 0.5rem;
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="background">
-    <header>
-      <h1>💳 Cash and Credit Management in Lebanon</h1>
-      <p>
-        <strong>What is this site for?</strong> This is a list of various types of commerces and shops in Lebanon where you can use a USD credit or debit card to pay and manage your available cash a bit better.<br><br>
-        This is a live site, and we add places regularly as soon as we know about them, voluntarily. NONE of this is sponsored by any business or individual in any way.  
-        (In the table below, scroll left to right to see additional info like location, website, and notes.)<br><br>
-        You can also use the search box to find a business quickly. Please share with the admin if you know of any other places.
-      </p>
-      <div>
-        <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
-      </div>
-    </header>
-
-    <div class="content">
-      <div class="search-section">
-        <input type="text" id="searchInput" placeholder="Search for a business..." onkeyup="filterTable()" />
-      </div>
-
-      <div class="table-section">
-        <table id="dataTable">
-          <thead><tr><th>Loading...</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div class="table-section" style="margin-top:2rem;">
-        <h2>ATM Withdrawal fees*</h2>
-        <p>*subject to bank of origin</p>
-        <table>
-          <tr>
-            <th>AM Bank</th>
-            <th>Credit Libanais</th>
-            <th>Most other banks</th>
-          </tr>
-          <tr>
-            <td>3%</td>
-            <td>3.5%</td>
-            <td>5%</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+  <h1>Community Directory</h1>
+  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <table id="data-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
 
   <script>
-    let allRows = [];
+    const apiUrl = "https://script.google.com/macros/s/AKfycbzoSoF4w0xcc3I7sZU-gIDgbzkiaB5jhfjYdCjD3giBPJ137fnvdHtjjArot5Xv3DDG/exec";
 
-    async function fetchTableData() {
-      try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbzoSoF4w0xcc3I7sZU-gIDgbzkiaB5jhfjYdCjD3giBPJ137fnvdHtjjArot5Xv3DDG/exec");
-        const data = await res.json();
-        if (!Array.isArray(data) || !data.length) return;
-        allRows = data;
-        buildTable(data);
-      } catch (err) {
-        document.querySelector("#dataTable").outerHTML = "<p>⚠️ Failed to load data.</p>";
-        console.error("Error loading API:", err);
+    const platformIcons = {
+      instagram: "📸",
+      facebook: "📘",
+      twitter: "🐦",
+      website: "🌐",
+      map: "📍",
+      linkedin: "💼",
+      youtube: "▶️"
+    };
+
+    function getIcon(label) {
+      const key = label.toLowerCase();
+      for (const name in platformIcons) {
+        if (key.includes(name)) return platformIcons[name];
       }
+      return "🔗";
     }
 
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => buildTable(data))
+      .catch(err => console.error("Error loading data:", err));
+
     function buildTable(data) {
-      const table = document.getElementById("dataTable");
-      const headers = Object.keys(data[0]);
+      const table = document.getElementById("data-table");
       const thead = table.querySelector("thead");
       const tbody = table.querySelector("tbody");
 
-      thead.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
+      thead.innerHTML = "";
       tbody.innerHTML = "";
+
+      const headers = Object.keys(data[0]);
+      const headerRow = document.createElement("tr");
+      headers.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
 
       data.forEach(row => {
         const tr = document.createElement("tr");
-        headers.forEach(h => {
+        headers.forEach(key => {
           const td = document.createElement("td");
-          const value = row[h];
+          const value = row[key];
 
           if (value && typeof value === "object" && value.url) {
-            td.innerHTML = `<a href="${value.url}" target="_blank">${value.label}</a>`;
+            td.innerHTML = `<a href="${value.url}" target="_blank" rel="noopener noreferrer">
+              ${getIcon(value.label)} ${value.label}
+            </a>`;
           } else {
             td.textContent = value || "";
           }
@@ -191,18 +187,6 @@
         tbody.appendChild(tr);
       });
     }
-
-    function filterTable() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = allRows.filter(row =>
-        Object.values(row).map(val =>
-          typeof val === "object" ? `${val.label} ${val.url}` : val
-        ).join(" ").toLowerCase().includes(query)
-      );
-      buildTable(filtered);
-    }
-
-    fetchTableData();
   </script>
 </body>
 </html>
