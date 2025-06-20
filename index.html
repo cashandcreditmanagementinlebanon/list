@@ -154,7 +154,7 @@
 
     async function fetchTableData() {
       try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbzWh7g0_jUmUSNT0AsIQWa9fQJ29T4eJ8-ZoIpFGmNbI1LUyyLAgyr_9WOnKeYs3hmO/exec");
+        const res = await fetch("https://script.google.com/macros/s/AKfycbzoSoF4w0xcc3I7sZU-gIDgbzkiaB5jhfjYdCjD3giBPJ137fnvdHtjjArot5Xv3DDG/exec");
         const data = await res.json();
         if (!Array.isArray(data) || !data.length) return;
         allRows = data;
