@@ -142,14 +142,26 @@
 </head>
   <script type="text/javascript">
   function translateTo(lang) {
-    const interval = setInterval(() => {
+    const tryTranslate = () => {
       const select = document.querySelector('.goog-te-combo');
       if (select) {
         select.value = lang;
         select.dispatchEvent(new Event('change'));
-        clearInterval(interval);
+        return true;
       }
-    }, 100);
+      return false;
+    };
+
+    // Try immediately, then retry every 100ms up to 2 seconds
+    if (!tryTranslate()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (tryTranslate() || attempts > 20) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
   }
 
   function googleTranslateElementInit() {
