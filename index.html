@@ -124,7 +124,29 @@
     }
   </style>
 </head>
-<body>
+  <script type="text/javascript">
+  function translateTo(lang) {
+    const interval = setInterval(() => {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,fr,ar',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<body>    
   <div id="language-switcher" class="translate-top">
     <button onclick="translateTo('en')">🇬🇧 English</button>
     <button onclick="translateTo('fr')">🇫🇷 Français</button>
