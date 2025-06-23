@@ -248,8 +248,22 @@
         allRows = data;
         buildTable(data);
       } catch (err) {
-        document.querySelector("#dataTable").outerHTML = "<p>⚠️ Failed to load data.</p>";
-        console.error("Error loading API:", err);
+       document.querySelector("#dataTable").outerHTML = `
+  <div class="table-section" style="background: rgba(255, 255, 255, 0.95); color: #000; padding: 1rem; border-radius: 8px;">
+    <p style="color: red; font-weight: bold;">
+      ⚠️ Data failed to load.
+    </p>
+    <p>
+      This may be caused by a privacy extension (e.g., ad blocker) or a browser security setting blocking external data.
+      Try reopening the site in an <strong>incognito/private window</strong> or temporarily disabling extensions.
+    </p>
+    <p style="margin-top: 1rem;">
+      <button onclick="fetchTableData()" style="padding: 0.5rem 1rem; font-size: 1rem; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🔄 Try Again
+      </button>
+    </p>
+  </div>
+`;
       }
     }
 
