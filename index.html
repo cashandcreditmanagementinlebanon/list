@@ -16,13 +16,12 @@
       background-size: cover;
       min-height: 100vh;
       color: #fff;
-      header,
-.content {
-  background: rgba(0, 0, 0, 0.65); /* adjust alpha (0 to 1) for more or less darkness */
-}
+    }
+    header,
+    .content {
+      background: rgba(0, 0, 0, 0.65);
     }
     header {
-      background: rgba(0, 0, 0, 0.65);
       padding: 2rem 1rem;
       text-align: center;
     }
@@ -51,7 +50,6 @@
       background-color: #1ebe5d;
     }
     .content {
-      background: rgba(0, 0, 0, 0.65);
       padding: 2rem 1rem;
     }
     .search-section {
@@ -106,50 +104,61 @@
       }
     }
     .translate-top {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
-}
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 9999;
+    }
+    .translate-top button {
+      margin: 0 0.25rem;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .translate-top button:hover {
+      background-color: #555;
+    }
   </style>
 </head>
-  <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,fr,ar',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <body>
-  <div id="google_translate_element" class="translate-top"></div>
+  <div id="language-switcher" class="translate-top">
+    <button onclick="translateTo('en')">🇬🇧 English</button>
+    <button onclick="translateTo('fr')">🇫🇷 Français</button>
+    <button onclick="translateTo('ar')">🇱🇧 العربية</button>
+  </div>
+  <div id="google_translate_element" style="display: none;"></div>
+
   <div class="background">
     <header>
       <h1>💳 Cash and Credit Management in Lebanon</h1>
       <p>
-        <strong>What is this site for?</strong> 
-        <p>
+        <strong>What is this site for?</strong>
+      </p>
+      <p>
         This is a list of various types of commerces and shops in Lebanon where you can use a USD credit or debit card to pay and manage your available cash a bit better.<br><br>
-        This is a live site, and we add places regularly as soon as we know about them, voluntarily. <strong>NONE</strong> of this is sponsored by any business or individual in any way.  
+        This is a live site, and we add places regularly as soon as we know about them, voluntarily. <strong>NONE</strong> of this is sponsored by any business or individual in any way.
         (In the table below, scroll left to right to see additional info like location, website, and notes.)<br><br>
         You can also use the search box to find a business quickly. Please share with the admin if you know of any other places.
       </p>
       <div>
         <a class="whatsapp-button" href="https://wa.me/96179300431" target="_blank">📱 Contact via WhatsApp</a>
       </div>
-   
-<div style="text-align: center; margin-top: 1rem;">
-  <a href="#atm-fees" class="whatsapp-button" style="background-color: #007bff;">
-    💰 Click here to see ATM fees in Lebanon
-  </a>
-</div>
+      <div style="text-align: center; margin-top: 1rem;">
+        <a href="#atm-fees" class="whatsapp-button" style="background-color: #007bff;">
+          💰 Click here to see ATM fees in Lebanon
+        </a>
+      </div>
+    </header>
+
     <div class="content">
       <div class="search-section">
         <input type="text" id="searchInput" placeholder="Search for a business..." onkeyup="filterTable()" />
       </div>
- </header>
+
       <div class="table-section">
         <table id="dataTable">
           <thead><tr><th>Loading...</th></tr></thead>
@@ -158,22 +167,21 @@
       </div>
 
       <div id="atm-fees" class="table-section" style="margin-top:2rem;">
-        <h2><strong>ATM Withdrawal fees*</stong></h2>
+        <h2><strong>ATM Withdrawal fees*</strong></h2>
         <p>*Please note that withdrawal fees are subject to bank of origin and may differ from one bank to another. The shown percentages are an average as reported by most international card holders.</p>
-<table>
-  <tr>
-    <th><a href="https://www.fransabank.com/corporate/branches-location" target="_blank" rel="noopener noreferrer">Fransabank Bank</a></th>
-    <th><a href="https://www.ambank.com/english/contact-us/branches-and-atms" target="_blank" rel="noopener noreferrer">AM Bank</a></th>
-    <th><a href="https://www.creditlibanais.com.lb/find-us?type=5&country=6" target="_blank" rel="noopener noreferrer">Credit Libanais</a></th>
-    <th>Most other banks</th>
-  </tr>
-  <tr>
-    <td>2.5%</td>
-    <td>3%</td>
-    <td>3.5%</td>
-    <td>5%</td>
-  </tr>
-</table>
+        <table>
+          <tr>
+            <th><a href="https://www.fransabank.com/corporate/branches-location" target="_blank" rel="noopener noreferrer">Fransabank Bank</a></th>
+            <th><a href="https://www.ambank.com/english/contact-us/branches-and-atms" target="_blank" rel="noopener noreferrer">AM Bank</a></th>
+            <th><a href="https://www.creditlibanais.com.lb/find-us?type=5&country=6" target="_blank" rel="noopener noreferrer">Credit Libanais</a></th>
+            <th>Most other banks</th>
+          </tr>
+          <tr>
+            <td>2.5%</td>
+            <td>3%</td>
+            <td>3.5%</td>
+            <td>5%</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -224,15 +232,4 @@
 
     function filterTable() {
       const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = allRows.filter(row =>
-        Object.values(row).map(val =>
-          typeof val === "object" ? `${val.label} ${val.url}` : val
-        ).join(" ").toLowerCase().includes(query)
-      );
-      buildTable(filtered);
-    }
-
-    fetchTableData();
-  </script>
-</body>
-</html>
+      const filtered = allRows
