@@ -231,5 +231,12 @@
     }
 
     function filterTable() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = allRows
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const filtered = allRows.filter(row =>
+    Object.values(row).map(val =>
+      typeof val === "object" ? `${val.label} ${val.url}` : val
+    ).join(" ").toLowerCase().includes(query)
+  );
+  buildTable(filtered);
+}fetchTableData();
+</script>
